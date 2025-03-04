@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        />
+<!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+            rel="stylesheet"
+        />
+<!-- Stylesheet -->
+        <link rel="stylesheet" href="style.css" />
+        <title>Dictionary</title>
+    </head>
+    <body>
+        <h1>Trieu Tam's Dictionary</h1>
+<!--add nút đọc từ-->
+        <audio id="sound"></audio> 
+<!--tạo khung-->
+        <div class="container"> 
+<!--tạo ô search từ-->
+            <div class="search-box">
+<!-- /tạo placeholder cho ô search từ/ -->
+                <input
+                    type="text"
+                    placeholder="Type the word here.."
+                    id="inp-word"
+                />  
+<!--nút Search-->
+                <button id="search-btn">Search</button> 
+            </div>
+<!--Change background color-->
+            <div class="result" id="result"></div> 
+        </div>
+            <div class="background">
+                <button class="btn-random">Change background color</button>
+            </div>
+<!-- Script -->
+        <script src="main.js"></script> /dẫn link js/
+    </body>
+</html>
