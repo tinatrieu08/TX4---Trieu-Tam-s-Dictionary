@@ -1,0 +1,58 @@
+const url = "https://api.dictionaryapi.dev/api/v2/entries/en/"; 
+//trả về phần tử có thuộc tính ID là giá trị được chỉ định khi muốn thao tác (hoặc lấy thông tin từ) một phần tử trên tài liệu:
+//ID phải là duy nhất trong một trang. Nếu bị trùng ID (có nhiều hơn 1 phần tử mang ID) thì sẽ trả về phần tử đầu tiên trong mã nguồn
+const result = document.getElementById("result"); 
+const sound = document.getElementById("sound");
+const btn = document.getElementById("search-btn");
+
+//Nhập từ vựng và trả kết quả
+btn.addEventListener("click", () => {  //gán một hàm xử lý sự kiện (event handler) cho một phần tử HTML. Khi người dùng nhấp vào nút "Click me!", hàm xử lý sự kiện sẽ được gọi và một hộp thoại cảnh báo sẽ xuất hiện với thông điệp "Button was clicked!".
+    let inpWord = document.getElementById("inp-word").value; //lấy giá trị của một phần tử HTML (thường là một ô nhập liệu, như <input> hoặc <textarea>) có id là "inp-word" và gán giá trị đó cho biến inpWord
+    fetch(`${url}${inpWord}`) //gửi yêu cầu đến một API và nhận dữ liệu dựa trên từ khóa mà người dùng đã nhập
+        .then((response) => response.json()) //xử lý phản hồi Promise được gửi về từ máy chủ và chuyển nó thành dữ liệu JSON
+        .then((data) => {   //nhận dữ liệu JSON và có thể thực hiện các thao tác với nó: ion ra nghĩa của từ,...
+            console.log(data); //in giá trị dữ liệu ra
+            result.innerHTML = `
+            <div class="word">
+                    <h3>${inpWord}</h3> //hiển thị từ mà người dùng đã nhập
+                    <button onclick="playSound()">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+                <div class="details">
+                    <p>${data[0].meanings[0].partOfSpeech}</p>
+                    <p>/${data[0].phonetic}/</p>
+                </div>
+                <p class="word-meaning">
+                   ${data[0].meanings[0].definitions[0].definition}
+                </p>
+                <p class="word-example">
+                    ${data[0].meanings[0].definitions[0].example || ""}
+                </p>`;
+            sound.setAttribute("src", `https:${data[0].phonetics[0].audio}`);
+        })
+        .catch(() => {  //xử lý các lỗi xảy ra trong chuỗi Promise
+            result.innerHTML = `<h3 class="error">Couldn't Find The Word</h3>`;
+        });
+});
+
+//Phát âm thanh
+function playSound() {
+    sound.play();
+}
+
+//Change Background Color Button
+const button = document.querySelector('.btn-random'); //tìm và lưu trữ một phần tử HTML đầu tiên trong tà liệu mà có class là btn-random vào biến button
+
+button.addEventListener('click',changeColor); //nhấn vào nút "click" => Change color
+
+function changeColor(){
+    const background = document.querySelector('.background'); //tìm kiếm và trả về phần tử đầu tiên trong tài liệu có class là background
+    const arrayColor = ['red','yellow','pink','gray','black','orange','blue']; //mảng chứa các chuỗi đại diện cho các màu sắc
+    let random = arrayColor[randomColor(arrayColor)]; //random 1 màu trong mảng chứa các chuỗi màu ở trên
+    background.style.backgroundColor = random; //thay đổi background color của một phần tử HTML một cách ngẫu nhiên thông qua css của nó
+    console.log(random); //in giá trị của biến random ra bảng điều khiển (console) của trình duyệt hoặc môi trường thực thi JavaScript
+}
+function randomColor(array){ //định nghĩa một hàm có tên là randomColor, nhận một tham số là array, tham số này được kỳ vọng là một mảng (array)
+    return Math.floor(Math.random()*array.length); //tạo ra một số ngẫu nhiên trong khoảng từ 0 đến (nhưng không bao gồm) array.length
+}
