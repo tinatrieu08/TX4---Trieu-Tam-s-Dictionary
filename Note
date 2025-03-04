@@ -1,0 +1,28 @@
+'const'
+    - khai báo một biến không thể thay đổi (constant). Biến này sẽ giữ giá trị của phần tử được tìm thấy.
+
+'btn.addEventListener'
+    - Là một phương thức trong JavaScript được sử dụng để gán một hàm xử lý sự kiện (event handler) cho một phần tử HTML. 
+    - Phương thức này cho phép bạn lắng nghe các sự kiện cụ thể (như click, mouseover, keypress, v.v.) và thực hiện một hành động khi sự kiện đó xảy ra.\
+
+'document.querySelector()'
+    - Tìm kiếm và trả về phần tử đầu tiên trong tài liệu phù hợp với bộ chọn CSS được cung cấp.
+
+'arrayColor'
+    - Một mảng chứa các chuỗi đại diện cho các màu sắc.
+
+
+'fetch(${url}${inpWord})'
+    - Gửi yêu cầu đến API từ điển với từ khóa là inpWord
+    - Các bước vận hành:
+        + Xử lý phản hồi:
+            Trong .then(response => { ... }), bạn kiểm tra xem phản hồi có thành công hay không bằng cách kiểm tra response.ok
+            Nếu thành công, bạn gọi response.json() để chuyển đổi phản hồi thành dữ liệu JSON.
+        + Xử lý dữ liệu:
+            Trong .then(data => { ... }), bạn nhận dữ liệu JSON và có thể thực hiện các thao tác với nó, như in ra nghĩa của từ
+        + Xử lý lỗi:
+            Nếu có lỗi trong quá trình gửi yêu cầu hoặc xử lý phản hồi, .catch(error => { ... }) sẽ được gọi để xử lý lỗi
+
+'.catch(() => { ... })'
+    - Xử lý các lỗi xảy ra trong chuỗi Promise
+    - Khi một Promise bị từ chối (rejected), hàm callback bên trong .catch() sẽ được gọi
